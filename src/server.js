@@ -18,10 +18,14 @@ const __dirname = path.resolve();
 // middleware
 app.use(express.json());
 // credentials:true meaning?? => server allows a browser to include cookies on request
-app.use(cors({ origin: '*', credentials: true }));
+app.use(cors({ origin: ["http://codemate-frontend.vercel.app/", "http://localhost:5173"], credentials: true }));
 app.use(clerkMiddleware()); // this adds auth field to request object: req.auth()
 
-app.use("/api/inngest", serve({ client: inngest, functions }));
+app.use("/api/inngest", serve({
+  client: inngest,
+  functions,
+}));
+
 app.use("/api/chat", chatRoutes);
 app.use("/api/sessions", sessionRoutes);
 
